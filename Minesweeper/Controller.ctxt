@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Controller
+comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ Spielfeld.\r\n\ \r\n\ @author\ Tim\ Busch,\ Beatrice\ Wellmann\ \r\n\ @version\ 1\r\n
+comment1.params=event
+comment1.target=void\ start(javafx.event.ActionEvent)
+comment2.params=
+comment2.target=void\ fuelleSpielfeld()
+comment3.params=fButton
+comment3.target=void\ mausListenerHinzufuegen(javafx.scene.control.Button)
+numComments=4
