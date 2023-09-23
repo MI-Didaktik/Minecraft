@@ -71,13 +71,27 @@ public class Spielfeld
     }
 
     private void zaehleNachbarn(){
-        // int gezaehlt; 
-        // for(int i=0; i<10; i++){
-        // for(int j=0; j<10; j++){
-        // Feld f = felder[i][j]; 
-        // f.setNachbarnAnzahl(gezaehlt); 
-        // }
-        // }
+
+        int rowCount = felder.length; 
+        int colCount = felder[0].length; 
+        int[][] richtungen = {{-1,0},{1,0},{0,-1},{0,1},{-1,-1},{1,-1},{1,1},{-1,1}}; 
+
+        for(int i=0; i<10; i++){
+            for(int j=0; j<10; j++){
+                int gezaehlt = 0; 
+                Feld f = felder[i][j]; 
+
+                for(int[] richtung : richtungen){
+                    int newRow = i + richtung[0]; 
+                    int newCol = j + richtung[1]; 
+                    Feld fNachbar = felder[newRow][newCol];
+                    if(newRow>=0 && newRow<rowCount && newCol>=0 && newCol<colCount){
+                        if(fNachbar.getBombe()) gezaehlt++; 
+                    }
+                    f.setNachbarnAnzahl(gezaehlt); 
+                }
+            }
+        }
     }
 
     public Feld[][] getFelder(){
