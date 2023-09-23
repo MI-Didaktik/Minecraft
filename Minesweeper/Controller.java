@@ -32,7 +32,6 @@ public class Controller {
     @FXML
     private TextField highscoreTextfeld;
 
-    private int anzSpieler=0;
     private Spiel spiel;
     private Spielfeld spielfeld;
 
@@ -41,11 +40,12 @@ public class Controller {
         spiel = new Spiel(this);
         spielfeld = spiel.getSpielfeld();
         fuelleSpielfeld();
+        highscoreTextfeld.setText(""+0+" s");
     }
 
     private void fuelleSpielfeld(){
-        spielfeldGrid = new GridPane();
-        Feld[][] felder = spiel.getFelder();
+        spielfeldGrid.getChildren().clear(); 
+        Feld[][] felder = spielfeld.getFelder();
         int reihen = spielfeld.getReihen();
         int spalten = spielfeld.getSpalten();
         for (int r = 0; r < reihen; r++){

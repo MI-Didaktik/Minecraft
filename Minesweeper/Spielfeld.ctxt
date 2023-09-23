@@ -1,11 +1,22 @@
 #BlueJ class context
 comment0.target=Spielfeld
 comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ Spielfeld.\r\n\ \r\n\ @author\ Tim\ Busch,\ Beatrice\ Wellmann\ \r\n\ @version\ 1\r\n
-comment1.params=
-comment1.target=Spielfeld()
+comment1.params=anzahlBomben\ reihen\ spalten
+comment1.target=Spielfeld(int,\ int,\ int)
 comment1.text=\r\n\ Konstruktor\ f\u00FCr\ Objekte\ der\ Klasse\ Spielfeld\r\n
 comment2.params=
 comment2.target=int\ getReihen()
 comment3.params=
 comment3.target=int\ getSpalten()
-numComments=4
+comment4.params=
+comment4.target=void\ erzeugeFeld()
+comment4.text=\r\n\ TODO\:\ nach\ Spielfeld\ verschieben\!\!\r\n\ \ erzeuge\ Feld-Objekte\r\n\ \ setze\ Random\ bombem\r\n\ \ suche\ und\ setze\ nachbarn\r\n
+comment5.params=
+comment5.target=void\ initialisiereFelder()
+comment6.params=
+comment6.target=void\ erzeugeBomben()
+comment7.params=
+comment7.target=void\ zaehleNachbarn()
+comment8.params=
+comment8.target=Feld[][]\ getFelder()
+numComments=9

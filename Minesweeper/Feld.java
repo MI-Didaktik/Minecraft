@@ -9,11 +9,11 @@ import javafx.scene.image.Image;
 public class Feld
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private boolean bombe;
+    private boolean istBombe;
     private int nachbarnAnzahl; 
     private Feldstatus s; 
     private Image bild; 
-    
+
     /**
      * Konstruktor für Objekte der Klasse Feld
      */
@@ -21,33 +21,38 @@ public class Feld
     {
         nachbarnAnzahl = 0; 
         s = Feldstatus.ZUGEDECKT; 
-        bombe = false; 
-        bild = new Image("Bilder/"+getBildName(s)+".png"); 
+        istBombe = false; 
+        bild = new Image("bilder/"+getBildName()+".png"); 
     }
-    
-    private String getBildName(Feldstatus fs){
-        switch(fs){
+
+    private String getBildName(){
+        switch(s){
             case AUFGEDECKT: return "Frei";  
             case MARKIERT: return "Markiert";  
-            default: if(bombe) return "Explosion"; else return (""+nachbarnAnzahl);
+            default: 
+                if(istBombe) {
+                    return "Explosion";
+                } 
+                else {
+                    return (""+nachbarnAnzahl);
+                }
         }
     }
-    
+
     public Image getBild(){
         return bild; 
     }
-    
+
     public boolean getBombe(){
-        return this.bombe;
+        return this.istBombe;
     }
-    
+
     public void setBombe(){
-        this.bombe = true; 
+        this.istBombe = true; 
     }
-    
+
     public void setNachbarnAnzahl(int anzahl){
         nachbarnAnzahl = anzahl; 
     }
-    
-    
+
 }

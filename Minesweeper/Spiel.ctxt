@@ -1,16 +1,13 @@
 #BlueJ class context
 comment0.target=Spiel
 comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ Spiel.\r\n\ \r\n\ @author\ Tim\ Busch,\ Beatrice\ Wellmann\ \r\n\ @version\ 1\r\n
-comment1.params=
-comment1.target=Spiel()
+comment1.params=controller
+comment1.target=Spiel(Controller)
 comment1.text=\r\n\ Konstruktor\ f\u00FCr\ Objekte\ der\ Klasse\ Spiel\r\n
 comment2.params=
-comment2.target=void\ erzeugeFeld()
-comment2.text=\r\n\ \ erzeuge\ Feld-Objekte\r\n\ \ setze\ Random\ bombem\r\n\ \ suche\ und\ setze\ nachbarn\r\n
+comment2.target=Spielfeld\ getSpielfeld()
 comment3.params=
-comment3.target=void\ erzeugeBomben()
-comment4.params=
-comment4.target=Spielfeld\ getSpielfeld()
-comment5.params=
-comment5.target=Feld[][]\ getFelder()
-numComments=6
+comment3.target=Spielstatus\ getSpielstatus()
+comment4.params=s
+comment4.target=void\ setSpielstatus(Spielstatus)
+numComments=5
