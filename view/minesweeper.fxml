@@ -32,19 +32,19 @@
                   <Insets left="20.0" />
                </padding>
             </Label>
-            <TextField fx:id="bomben" alignment="CENTER_RIGHT" editable="false" prefHeight="25.0" prefWidth="38.0" text="-" />
+            <TextField fx:id="bombeTextfeld" alignment="CENTER_RIGHT" editable="false" prefHeight="25.0" prefWidth="38.0" text="-" />
             <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="31.0" prefWidth="74.0" text="Zeit">
                <HBox.margin>
                   <Insets left="60.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="zeit" alignment="CENTER_RIGHT" editable="false" prefHeight="25.0" prefWidth="56.0" text="- s" />
+            <TextField fx:id="zeitTextfeld" alignment="CENTER_RIGHT" editable="false" prefHeight="25.0" prefWidth="56.0" text="- s" />
          </children>
          <VBox.margin>
             <Insets bottom="10.0" />
          </VBox.margin>
       </HBox>
-      <GridPane fx:id="spielfeld">
+      <GridPane fx:id="spielfeldGrid">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -71,6 +71,7 @@
         </rowConstraints>
          <children>
             <Button id="f00" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button id="f00" alignment="CENTER" contentDisplay="CENTER" disable="true" graphicTextGap="0.0" layoutX="18.0" layoutY="8.0" mnemonicParsing="false" textAlignment="CENTER" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <Separator prefHeight="18.0" prefWidth="1051.0">
@@ -79,13 +80,13 @@
          </padding></Separator>
       <HBox prefWidth="1051.0">
          <children>
-            <Button fx:id="ButtonStart" mnemonicParsing="false" onAction="#start" text="Start" />
+            <Button fx:id="startButton" mnemonicParsing="false" onAction="#start" text="Start" />
             <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="31.0" prefWidth="74.0" text="Highscore">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="highscore" alignment="CENTER_RIGHT" editable="false" prefHeight="25.0" prefWidth="56.0" text="- s">
+            <TextField fx:id="highscoreTextfeld" alignment="CENTER_RIGHT" editable="false" prefHeight="25.0" prefWidth="56.0" text="- s">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>

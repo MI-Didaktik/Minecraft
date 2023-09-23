@@ -2,14 +2,13 @@ import javax.swing.*;
 /**
  * Beschreiben Sie hier die Klasse Spielfeld.
  * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
+ * @author Tim Busch, Beatrice Wellmann 
+ * @version 1
  */ 
 public class Spielfeld
 {
-    // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    public int zeilen;
-    public int spalten; 
+    private int reihen;
+    private int spalten; 
     private JLabel bomben; 
     private JLabel zeit; 
     private JLabel highscore; 
@@ -19,8 +18,16 @@ public class Spielfeld
      */
     public Spielfeld()
     {
-        zeilen = 10; 
+        reihen = 10; 
         spalten = 10; 
+    }
+    
+    public int getReihen(){
+        return reihen;
+    }
+    
+    public int getSpalten(){
+        return spalten;
     }
 
     

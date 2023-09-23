@@ -7,8 +7,8 @@
  */
 public class Spiel
 {
-    // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    int[][] feld; 
+    private Spielfeld spielfeld;
+    private Feld[][] felder; 
     private int zugedeckt; 
     private Spielstatus s; 
     /**
@@ -16,13 +16,24 @@ public class Spiel
      */
     public Spiel()
     {
-        feld = new int[10][10]; 
-        zugedeckt = 100; 
+        spielfeld = new Spielfeld();
+        felder = new Feld[spielfeld.getReihen()][spielfeld.getSpalten()]; 
+        zugedeckt = spielfeld.getReihen()*spielfeld.getSpalten(); 
         erzeugeFeld(); 
         s = Spielstatus.NICHTGESTARTET;  
     }
 
-    public void erzeugeFeld(){
-        
+    private void erzeugeFeld(){
+        //erzeuge Feld-Objekte
+        //setze Random Bomben
+        //suche und setze Nachbarn
+    }
+    
+    public Spielfeld getSpielfeld(){
+        return spielfeld;
+    }
+    
+    public Feld[][] getFelder(){
+        return felder;
     }
 }
