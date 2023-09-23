@@ -2,8 +2,8 @@
 /**
  * Beschreiben Sie hier die Klasse Spiel.
  * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
+ * @author Tim Busch, Beatrice Wellmann 
+ * @version 1
  */
 public class Spiel
 {
@@ -19,7 +19,7 @@ public class Spiel
         feld = new int[10][10]; 
         zugedeckt = 100; 
         erzeugeFeld(); 
-        s = Spielstatus.nichtGestartet;  
+        s = Spielstatus.NICHTGESTARTET;  
     }
 
     public void erzeugeFeld(){

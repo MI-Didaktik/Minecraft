@@ -2,8 +2,8 @@
 /**
  * Beschreiben Sie hier die Klasse Feld.
  * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
+ * @author (Tim Busch, Beatrice Wellmann) 
+ * @version (1)
  */
 public class Feld
 {
@@ -18,7 +18,7 @@ public class Feld
     public Feld()
     {
         nachbarnAnzahl = 0; 
-        s = Feldstatus.Zugedeckt; 
+        s = Feldstatus.ZUGEDECKT; 
         bombe = false; 
     }
 }

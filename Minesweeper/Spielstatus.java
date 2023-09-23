@@ -2,10 +2,10 @@
 /**
  * Beschreiben Sie hier die Aufzählungsklasse Status.
  * 
- * @author  (Ihr Name)
- * @version (eine Versionsnummer oder ein Datum)
+ * @author (Tim Busch, Beatrice Wellmann) 
+ * @version (1)
  */
 public enum Spielstatus
 {
-    Gewonnen, Verloren, Laufend, nichtGestartet
+    GEWONNEN, VERLOREN, LAUFEND, NICHTGESTARTET
 }

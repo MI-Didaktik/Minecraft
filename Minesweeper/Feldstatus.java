@@ -2,10 +2,10 @@
 /**
  * Beschreiben Sie hier die Aufzählungsklasse Feldstatus.
  * 
- * @author  (Ihr Name)
- * @version (eine Versionsnummer oder ein Datum)
+ * @author (Tim Busch, Beatrice Wellmann) 
+ * @version (1)
  */
 public enum Feldstatus
 {
-    Aufgedeckt, Markiert, Zugedeckt 
+    AUFGEDECKT, MARKIERT, ZUGEDECKT 
 }
