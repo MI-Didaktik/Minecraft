@@ -37,5 +37,17 @@ public class Feld
         return bild; 
     }
     
+    public boolean getBombe(){
+        return this.bombe;
+    }
+    
+    public void setBombe(){
+        this.bombe = true; 
+    }
+    
+    public void setNachbarnAnzahl(int anzahl){
+        nachbarnAnzahl = anzahl; 
+    }
+    
     
 }
