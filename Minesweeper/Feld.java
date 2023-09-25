@@ -13,12 +13,16 @@ public class Feld
     private int nachbarnAnzahl; 
     private Feldstatus feldstatus; 
     private Image bild; 
+    private int reihe;
+    private int spalte;
 
     /**
      * Konstruktor für Objekte der Klasse Feld
      */
-    public Feld()
+    public Feld(int reihe, int spalte)
     {
+        this.reihe = reihe;
+        this.spalte = spalte;
         nachbarnAnzahl = 0; 
         feldstatus = Feldstatus.ZUGEDECKT; 
         istBombe = false; 
@@ -55,12 +59,23 @@ public class Feld
         nachbarnAnzahl = anzahl; 
     }
     
+    public int getNachbarnAnzahl(){
+        return nachbarnAnzahl;
+    }
+    
     public void setFeldstatus(Feldstatus s){
         this.feldstatus = s;
     }
     
     public Feldstatus getFeldstatus(){
         return this.feldstatus;
+    }
+    
+    public int getReihe(){
+        return reihe;
+    }
+    public int getSpalte(){
+        return spalte;
     }
 
 }
