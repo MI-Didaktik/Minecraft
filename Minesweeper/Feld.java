@@ -43,7 +43,7 @@ public class Feld
         return bild; 
     }
 
-    public boolean getBombe(){
+    public boolean istBombe(){
         return this.istBombe;
     }
 

@@ -59,10 +59,10 @@ public class Spielfeld
     private void erzeugeBomben(){
         Random random = new Random(); 
         for(int i=0; i<anzahlBomben; i++){
-            int zeile = random.nextInt(10); 
-            int spalte = random.nextInt(10); 
-            Feld f = felder[zeile][spalte]; 
-            if(f.getBombe()){
+            int reihe = random.nextInt(reihen); 
+            int spalte = random.nextInt(spalten); 
+            Feld f = felder[reihe][spalte]; 
+            if(f.istBombe()){
                 i--; 
             } else{
                 f.setBombe(); 
@@ -72,23 +72,25 @@ public class Spielfeld
 
     private void zaehleNachbarn(){
 
-        int rowCount = felder.length; 
-        int colCount = felder[0].length; 
+        int anzahlReihen = felder.length; 
+        int anzahlSpalten = felder[0].length; 
         int[][] richtungen = {{-1,0},{1,0},{0,-1},{0,1},{-1,-1},{1,-1},{1,1},{-1,1}}; 
 
-        for(int i=0; i<10; i++){
-            for(int j=0; j<10; j++){
-                int gezaehlt = 0; 
-                Feld f = felder[i][j]; 
+        for(int r=0; r<reihen; r++){
+            for(int s=0; s<spalten; s++){
+                int nachbarBomben = 0; 
+                Feld f = felder[r][s]; 
 
                 for(int[] richtung : richtungen){
-                    int newRow = i + richtung[0]; 
-                    int newCol = j + richtung[1]; 
-                    Feld fNachbar = felder[newRow][newCol];
-                    if(newRow>=0 && newRow<rowCount && newCol>=0 && newCol<colCount){
-                        if(fNachbar.getBombe()) gezaehlt++; 
+                    int nr = r + richtung[0]; 
+                    int ns = s + richtung[1]; 
+                    if(nr>=0 && nr<anzahlReihen && ns>=0 && ns<anzahlSpalten){
+                        Feld fNachbar = felder[nr][ns];
+                        if(fNachbar.istBombe()) {
+                            nachbarBomben++; 
+                        }
                     }
-                    f.setNachbarnAnzahl(gezaehlt); 
+                    f.setNachbarnAnzahl(nachbarBomben); 
                 }
             }
         }
