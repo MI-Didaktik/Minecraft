@@ -29,7 +29,7 @@ public class Feld
 
     private String getBildName(){
         switch(feldstatus){
-            case ZUGEDECKT: return "0";  
+            case ZUGEDECKT: return "Frei";  
             case MARKIERT: return "Markiert";  
             default: 
                 if(istBombe) {

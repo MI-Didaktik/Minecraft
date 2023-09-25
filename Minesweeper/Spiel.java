@@ -20,7 +20,7 @@ public class Spiel
         this.controller = controller;
         //TODO: übergabe der reihen/spalten/bomben anzahl
         //ggf. Schwierigkeitslevel statt volle Kontrolle über spalten/zeilen/bomben-Anzahl
-        spielfeld = new Spielfeld(10,10,10);
+        spielfeld = new Spielfeld(20,10,10);
         spielstatus = Spielstatus.NICHTGESTARTET;  
     }
 
@@ -41,16 +41,18 @@ public class Spiel
         neueFelder.add(feld);
         feld.setFeldstatus(Feldstatus.AUFGEDECKT);
         if (feld.istBombe()){
-            // spielstatus = Spielstatus.VERLOREN;
+            spielstatus = Spielstatus.VERLOREN;
+            controller.aktualisiereSpielstatus();
         }
         else {
             if (feld.getNachbarnAnzahl() == 0){
                 //Alternativ: spielfeld.deckeFreieNachbarnAuf(feld, neueFelder);
-                spielfeld.deckeFreieNachbarnAuf(feld, neueFelder);
+                spielfeld.deckeFreieNachbarnAufRekursiv(feld, neueFelder);
             }
             spielfeld.aktualisiereZugedeckteFelder(neueFelder.size());
             if (spielfeld.getAnzahlZugedeckt()==spielfeld.getAnzahlBomben()){
                 spielstatus = Spielstatus.GEWONNEN;
+                controller.aktualisiereSpielstatus();
             }
         }
         return neueFelder;

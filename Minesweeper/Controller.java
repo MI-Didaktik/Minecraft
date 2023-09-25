@@ -37,46 +37,61 @@ public class Controller {
     //TODO: brauch man das
     private Spielfeld spielfeld;
 
+    private Button[][] buttons;
+
     @FXML
     void start(ActionEvent event) throws IOException {
         spiel = new Spiel(this);
         spielfeld = spiel.getSpielfeld();
         fuelleSpielfeld();
-        //TODO: entfernen
-        highscoreTextfeld.setText(""+0+" s");
     }
 
     private void fuelleSpielfeld(){
         spielfeldGrid.getChildren().clear(); 
         int reihen = spielfeld.getReihen();
         int spalten = spielfeld.getSpalten();
+        buttons = new Button[reihen][spalten];
         for (int r = 0; r < reihen; r++){
             for (int s = 0; s< spalten; s++){
                 Feld feld = spielfeld.getFeld(r, s);
                 Button fButton = new Button();
                 fButton.setId("#b"+r+s);
                 mausListenerHinzufuegen(fButton,r,s);
-                spielfeldGrid.add(fButton, r, s);
+                spielfeldGrid.add(fButton, s, r);
                 setzeBildFuerButton(fButton, feld.getBild());
+                buttons[r][s] = fButton;
             }
         }
         //TODO: Spielfeldgröße an Grid anpassen
     }
 
     public void aktualisiereSpielstatus(){
-        //status auslesen
+        if (spiel.getSpielstatus().equals(Spielstatus.GEWONNEN)){
+            deckeSpielfeldAuf();
+            //TODO Zeige Nachricht, aktualisiere Highscore
+        }
+        else if (spiel.getSpielstatus().equals(Spielstatus.VERLOREN)){
+            deckeSpielfeldAuf();
+            //TODO Zeige Nachricht
+        }
         //label, smiley, highscore ändern
+    }
+
+    public void deckeSpielfeldAuf(){
+        for (int r = 0 ; r< spielfeld.getReihen(); r++){
+            for (int s = 0 ; s< spielfeld.getSpalten(); s++){
+                Feld feld =spielfeld.getFelder()[r][s];
+                if (feld.getFeldstatus()!=Feldstatus.AUFGEDECKT){
+                    feld.setFeldstatus(Feldstatus.AUFGEDECKT);
+                }
+                Button b = buttons[r][s];
+                aktualisiereBild(feld, b);
+            }  }
     }
 
     private void aktualisiereBild(Feld feld, Button fButton){
         Image bild = feld.getBild();
         setzeBildFuerButton(fButton, bild); 
-    }
-
-    //TODO kürzen
-    public void aktualisiereFeld(Feld feld, int r, int s){
-        Button fButton = (Button) spielfeldGrid.getScene().lookup("#b"+r+s);
-        aktualisiereBild(feld, fButton);
     }
 
     private void setzeBildFuerButton(Button button, Image bild){
@@ -88,29 +103,25 @@ public class Controller {
     private void mausListenerHinzufuegen(Button fButton, int r, int s){
         fButton.setOnMouseClicked(event ->
                 {
+                    Feld feld = spielfeld.getFeld(r,s);
                     Spielstatus status = spiel.getSpielstatus();
                     if (status.equals(Spielstatus.NICHTGESTARTET)){
                         spiel.setSpielstatus(Spielstatus.LAUFEND);
                         status = spiel.getSpielstatus();
                         //TODO: starte timer
                     }
-                    if (status.equals(Spielstatus.LAUFEND)){
-                        // Was passiert beim linken oder rechten Mausklick?
-                        if (event.getButton() == MouseButton.PRIMARY)
+                    if (status.equals(Spielstatus.LAUFEND) && !feld.getFeldstatus().equals(Feldstatus.AUFGEDECKT)){
+                        if (event.getButton() == MouseButton.PRIMARY )
                         {
-                            Feld feld = spielfeld.getFeld(r,s);
-                            List<Feld> felder = spiel.deckeAuf(feld);
+                            List<Feld> neueFelder = spiel.deckeAuf(feld);
                             if (spiel.getSpielstatus().equals(Spielstatus.LAUFEND)){
-                                for (Feld f: felder){
-                                    Button b = (Button) spielfeldGrid.getScene().lookup("#b"+f.getReihe()+f.getSpalte());
-                                    // b.setDisable(true);
+                                for (Feld f: neueFelder){
+                                    Button b = buttons[f.getReihe()][f.getSpalte()];                                   
                                     aktualisiereBild(f, b); 
                                 }   
                             }
-                            //TODO: bild ändern spiellogik, bombenanzahl etc
                         } else if (event.getButton() == MouseButton.SECONDARY)
                         {
-                            Feld feld = spielfeld.getFeld(r,s);
                             spiel.markiere(feld);
                             aktualisiereBild(feld, fButton);
                             //aktualisiere Bombenanzahl
