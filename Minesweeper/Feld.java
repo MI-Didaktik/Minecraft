@@ -12,7 +12,6 @@ public class Feld
     private boolean istBombe;
     private int nachbarnAnzahl; 
     private Feldstatus feldstatus; 
-    private Image bild; 
     private int reihe;
     private int spalte;
 
@@ -26,12 +25,11 @@ public class Feld
         nachbarnAnzahl = 0; 
         feldstatus = Feldstatus.ZUGEDECKT; 
         istBombe = false; 
-        bild = new Image("bilder/"+getBildName()+".png"); 
     }
 
     private String getBildName(){
         switch(feldstatus){
-            case AUFGEDECKT: return "Frei";  
+            case ZUGEDECKT: return "0";  
             case MARKIERT: return "Markiert";  
             default: 
                 if(istBombe) {
@@ -44,7 +42,7 @@ public class Feld
     }
 
     public Image getBild(){
-        return bild; 
+        return new Image("bilder/"+getBildName()+".png"); 
     }
 
     public boolean istBombe(){

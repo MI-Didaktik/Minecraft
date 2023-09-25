@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import java.io.IOException;
 import javafx.event.EventHandler;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 /**
  * Beschreiben Sie hier die Klasse Controller.
@@ -97,24 +98,22 @@ public class Controller {
                         // Was passiert beim linken oder rechten Mausklick?
                         if (event.getButton() == MouseButton.PRIMARY)
                         {
-                            fButton.setDisable(true);
                             Feld feld = spielfeld.getFeld(r,s);
-                            spiel.deckeAuf(feld);
+                            List<Feld> felder = spiel.deckeAuf(feld);
                             if (spiel.getSpielstatus().equals(Spielstatus.LAUFEND)){
-                                aktualisiereBild(feld, fButton);    
+                                for (Feld f: felder){
+                                    Button b = (Button) spielfeldGrid.getScene().lookup("#b"+f.getReihe()+f.getSpalte());
+                                    // b.setDisable(true);
+                                    aktualisiereBild(f, b); 
+                                }   
                             }
                             //TODO: bild ändern spiellogik, bombenanzahl etc
                         } else if (event.getButton() == MouseButton.SECONDARY)
                         {
-                            fButton.setDisable(false);
                             Feld feld = spielfeld.getFeld(r,s);
-                            if (feld.getFeldstatus().equals(Feldstatus.ZUGEDECKT)){
-                                spiel.markiere(feld);
-                            }
-                            else if (feld.getFeldstatus().equals(Feldstatus.MARKIERT)){
-                                spiel.deckeZu(feld);
-                            }
+                            spiel.markiere(feld);
                             aktualisiereBild(feld, fButton);
+                            //aktualisiere Bombenanzahl
 
                             //TODO: bild ändern spiellogik, bombenanzahl etc
                         }

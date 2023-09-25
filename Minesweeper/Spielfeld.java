@@ -14,7 +14,7 @@ public class Spielfeld
     private Feld[][] felder; 
     private int reihen;
     private int spalten; 
-    private int zugedeckt;
+    private int anzahlZugedeckt;
     private int anzahlBomben;
 
     /**
@@ -26,7 +26,7 @@ public class Spielfeld
         this.reihen = reihen; 
         this.spalten = spalten; 
         this.anzahlBomben = anzahlBomben;
-        zugedeckt = reihen*spalten; 
+        anzahlZugedeckt = reihen*spalten; 
         erzeugeFeld(); 
     }
 
@@ -88,6 +88,18 @@ public class Spielfeld
             }
         }
     }
+    
+    public int getAnzahlZugedeckt(){
+        return anzahlZugedeckt;
+    }
+    
+    public void aktualisiereZugedeckteFelder(int n){
+        this.anzahlZugedeckt-=n;
+    }
+    
+    public int getAnzahlBomben(){
+        return anzahlBomben;
+    }
 
     public Feld[][] getFelder(){
         return felder;
@@ -101,10 +113,7 @@ public class Spielfeld
         return feld;
     }
 
-    //TODO
-    // start.setFeldstatus(Feldstatus.AUFGEDECKT);
-    // neueFelder.add(start);
-    public void deckeFreieNachbarnAufRekursiv(Feld start, List<Feld> neueFelder){
+     public void deckeFreieNachbarnAufRekursiv(Feld start, List<Feld> neueFelder){
         if (start.getNachbarnAnzahl()==0){
             int[][] richtungen = {{-1,0},{1,0},{0,-1},{0,1},{-1,-1},{1,-1},{1,1},{-1,1}}; 
             for(int[] richtung : richtungen){
@@ -122,10 +131,6 @@ public class Spielfeld
         }
     }
 
-    //TODO: auslagern
-    // List<Feld> neueFelder = new ArrayList<>();
-    // start.setFeldstatus(Feldstatus.AUFGEDECKT);
-    // neueFelder.add(start);
     public void deckeFreieNachbarnAuf(Feld start, List<Feld> neueFelder){
         if (start.getNachbarnAnzahl()==0){
             boolean neuerNachbarGefunden = true;
