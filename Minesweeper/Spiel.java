@@ -15,6 +15,8 @@ public class Spiel
     public Spiel(Controller controller)
     {
         this.controller = controller;
+        //TODO: übergabe der reihen/spalten/bomben anzahl
+        //ggf. Schwierigkeitslevel statt volle Kontrolle über spalten/zeilen/bomben-Anzahl
         spielfeld = new Spielfeld(10,10,10);
         spielstatus = Spielstatus.NICHTGESTARTET;  
     }
@@ -26,7 +28,24 @@ public class Spiel
     public Spielstatus getSpielstatus(){
         return spielstatus;
     }
+
     public void setSpielstatus(Spielstatus s){
         this.spielstatus = s;
+    }
+
+    public void deckeAuf(Feld feld){
+        feld.setFeldstatus(Feldstatus.AUFGEDECKT);
+        //TODO Spiellogik
+        // prüfe ob gewonnen oder verloren
+            // //TODO: stoppe timer, highscore....
+        //rückmeldung an controller -> decke felder 1 - n auf
+    }
+
+    public void markiere(Feld feld){
+        //TODO
+    }
+
+    public void deckeZu(Feld feld){
+        //TODO 
     }
 }

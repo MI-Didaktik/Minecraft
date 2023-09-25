@@ -36,12 +36,6 @@ public class Spielfeld
         return spalten;
     }
 
-    /**
-     * TODO: nach Spielfeld verschieben!!
-     *  erzeuge Feld-Objekte
-     *  setze Random bombem
-     *  suche und setze nachbarn
-     */
     public void erzeugeFeld(){
         initialisiereFelder();
         erzeugeBomben(); 
@@ -100,4 +94,11 @@ public class Spielfeld
         return felder;
     }
 
+    public Feld getFeld(int r, int s){
+        Feld feld = null;
+        if (r>=0 && r<reihen && s>=0 && s<spalten){
+            feld = felder[r][s];
+        }
+        return feld;
+    }
 }

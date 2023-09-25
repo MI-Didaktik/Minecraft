@@ -11,7 +11,7 @@ public class Feld
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private boolean istBombe;
     private int nachbarnAnzahl; 
-    private Feldstatus s; 
+    private Feldstatus feldstatus; 
     private Image bild; 
 
     /**
@@ -20,13 +20,13 @@ public class Feld
     public Feld()
     {
         nachbarnAnzahl = 0; 
-        s = Feldstatus.ZUGEDECKT; 
+        feldstatus = Feldstatus.ZUGEDECKT; 
         istBombe = false; 
         bild = new Image("bilder/"+getBildName()+".png"); 
     }
 
     private String getBildName(){
-        switch(s){
+        switch(feldstatus){
             case AUFGEDECKT: return "Frei";  
             case MARKIERT: return "Markiert";  
             default: 
@@ -53,6 +53,14 @@ public class Feld
 
     public void setNachbarnAnzahl(int anzahl){
         nachbarnAnzahl = anzahl; 
+    }
+    
+    public void setFeldstatus(Feldstatus s){
+        this.feldstatus = s;
+    }
+    
+    public Feldstatus getFeldstatus(){
+        return this.feldstatus;
     }
 
 }
