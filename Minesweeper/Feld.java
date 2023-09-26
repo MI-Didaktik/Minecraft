@@ -10,7 +10,7 @@ public class Feld
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private boolean istBombe;
-    private int nachbarnAnzahl; 
+    private int nachbarBombenAnzahl; 
     private Feldstatus feldstatus; 
     private int reihe;
     private int spalte;
@@ -22,21 +22,21 @@ public class Feld
     {
         this.reihe = reihe;
         this.spalte = spalte;
-        nachbarnAnzahl = 0; 
-        feldstatus = Feldstatus.ZUGEDECKT; 
+        nachbarBombenAnzahl = 0; 
+        feldstatus = Feldstatus.VERDECKT; 
         istBombe = false; 
     }
 
     private String getBildName(){
         switch(feldstatus){
-            case ZUGEDECKT: return "Frei";  
+            case VERDECKT: return "Frei";  
             case MARKIERT: return "Markiert";  
             default: 
                 if(istBombe) {
                     return "Explosion";
                 } 
                 else {
-                    return (""+nachbarnAnzahl);
+                    return (""+nachbarBombenAnzahl);
                 }
         }
     }
@@ -53,12 +53,12 @@ public class Feld
         this.istBombe = true; 
     }
 
-    public void setNachbarnAnzahl(int anzahl){
-        nachbarnAnzahl = anzahl; 
+    public void setNachbarBombenAnzahl(int anzahl){
+        nachbarBombenAnzahl = anzahl; 
     }
     
-    public int getNachbarnAnzahl(){
-        return nachbarnAnzahl;
+    public int getNachbarBombenAnzahl(){
+        return nachbarBombenAnzahl;
     }
     
     public void setFeldstatus(Feldstatus s){

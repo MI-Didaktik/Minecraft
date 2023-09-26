@@ -36,6 +36,16 @@ public class Spiel
         this.spielstatus = s;
     }
 
+    public List<Feld> deckeVerdeckteNachbarnAuf(Feld feld){
+        List<Feld> neueFelder = new ArrayList<>();
+        for (Feld fNachbar : spielfeld.getNachbarFelder(feld)){
+            if (fNachbar.getFeldstatus().equals(Feldstatus.VERDECKT)){
+                neueFelder.addAll(deckeAuf(fNachbar));
+            }
+        }
+        return neueFelder;
+    }
+
     public List<Feld> deckeAuf(Feld feld){
         List<Feld> neueFelder = new ArrayList<>();
         neueFelder.add(feld);
@@ -45,12 +55,12 @@ public class Spiel
             controller.aktualisiereSpielstatus();
         }
         else {
-            if (feld.getNachbarnAnzahl() == 0){
+            if (feld.getNachbarBombenAnzahl() == 0){
                 //Alternativ: spielfeld.deckeFreieNachbarnAuf(feld, neueFelder);
                 spielfeld.deckeFreieNachbarnAufRekursiv(feld, neueFelder);
             }
-            spielfeld.aktualisiereZugedeckteFelder(neueFelder.size());
-            if (spielfeld.getAnzahlZugedeckt()==spielfeld.getAnzahlBomben()){
+            spielfeld.aktualisiereVerdeckteFelder(neueFelder.size());
+            if (spielfeld.getAnzahlVerdeckt()==spielfeld.getAnzahlBomben()){
                 spielstatus = Spielstatus.GEWONNEN;
                 controller.aktualisiereSpielstatus();
             }
@@ -60,11 +70,11 @@ public class Spiel
     }
 
     public void markiere(Feld feld){
-        if (feld.getFeldstatus().equals(Feldstatus.ZUGEDECKT)){
+        if (feld.getFeldstatus().equals(Feldstatus.VERDECKT)){
             feld.setFeldstatus(Feldstatus.MARKIERT);
         }
         else if (feld.getFeldstatus().equals(Feldstatus.MARKIERT)){
-            feld.setFeldstatus(Feldstatus.ZUGEDECKT);
+            feld.setFeldstatus(Feldstatus.VERDECKT);
         }
     }
 

@@ -12,6 +12,7 @@ import java.io.IOException;
 import javafx.event.EventHandler;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Beschreiben Sie hier die Klasse Controller.
@@ -110,17 +111,27 @@ public class Controller {
                         status = spiel.getSpielstatus();
                         //TODO: starte timer
                     }
-                    if (status.equals(Spielstatus.LAUFEND) && !feld.getFeldstatus().equals(Feldstatus.AUFGEDECKT)){
+                    if (status.equals(Spielstatus.LAUFEND) ){
+
                         if (event.getButton() == MouseButton.PRIMARY )
                         {
-                            List<Feld> neueFelder = spiel.deckeAuf(feld);
+                            List<Feld> neueFelder = new ArrayList<>();
+                            if(!feld.getFeldstatus().equals(Feldstatus.AUFGEDECKT)){
+                                neueFelder = spiel.deckeAuf(feld);
+                            }
+                            else if (event.getClickCount()==2){
+                                if( spielfeld.getMarkierteNachbarnAnzahl(feld)== feld.getNachbarBombenAnzahl()){
+                                    neueFelder= spiel.deckeVerdeckteNachbarnAuf(feld);
+                                }
+                            }
                             if (spiel.getSpielstatus().equals(Spielstatus.LAUFEND)){
                                 for (Feld f: neueFelder){
                                     Button b = buttons[f.getReihe()][f.getSpalte()];                                   
                                     aktualisiereBild(f, b); 
                                 }   
                             }
-                        } else if (event.getButton() == MouseButton.SECONDARY)
+                        }
+                        else if (event.getButton() == MouseButton.SECONDARY)
                         {
                             spiel.markiere(feld);
                             aktualisiereBild(feld, fButton);
@@ -128,7 +139,7 @@ public class Controller {
 
                             //TODO: bild ändern spiellogik, bombenanzahl etc
                         }
-                    }
+                    } 
             });
     }
 

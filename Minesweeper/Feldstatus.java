@@ -7,5 +7,5 @@
  */
 public enum Feldstatus
 {
-    AUFGEDECKT, MARKIERT, ZUGEDECKT 
+    AUFGEDECKT, MARKIERT, VERDECKT 
 }

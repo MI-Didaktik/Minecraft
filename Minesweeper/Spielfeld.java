@@ -11,11 +11,10 @@ import java.util.ArrayList;
  */ 
 public class Spielfeld
 {
-    private static int[][] richtungen = {{-1,0},{1,0},{0,-1},{0,1},{-1,-1},{1,-1},{1,1},{-1,1}}; 
     private Feld[][] felder; 
     private int reihen;
     private int spalten; 
-    private int anzahlZugedeckt;
+    private int anzahlVerdeckt;
     private int anzahlBomben;
 
     /**
@@ -27,7 +26,7 @@ public class Spielfeld
         this.reihen = reihen; 
         this.spalten = spalten; 
         this.anzahlBomben = anzahlBomben;
-        anzahlZugedeckt = reihen*spalten; 
+        anzahlVerdeckt = reihen*spalten; 
         erzeugeFeld(); 
     }
 
@@ -72,29 +71,25 @@ public class Spielfeld
             for(int s=0; s<spalten; s++){
                 int nachbarBomben = 0; 
                 Feld f = felder[r][s]; 
-                for(int[] richtung : richtungen){
-                    int nr = r + richtung[0]; 
-                    int ns = s + richtung[1]; 
-                    if(nr>=0 && nr<reihen && ns>=0 && ns<spalten){
-                        Feld fNachbar = felder[nr][ns];
-                        if(fNachbar.istBombe()) {
-                            nachbarBomben++; 
-                        }
+                List<Feld> nachbarFelder = getNachbarFelder(f);
+                for(Feld fNachbar : nachbarFelder){
+                    if(fNachbar.istBombe()) {
+                        nachbarBomben++; 
                     }
                 }
-                f.setNachbarnAnzahl(nachbarBomben); 
+                f.setNachbarBombenAnzahl(nachbarBomben); 
             }
         }
     }
-    
-    public int getAnzahlZugedeckt(){
-        return anzahlZugedeckt;
+
+    public int getAnzahlVerdeckt(){
+        return anzahlVerdeckt;
     }
-    
-    public void aktualisiereZugedeckteFelder(int n){
-        this.anzahlZugedeckt=this.anzahlZugedeckt-n;
+
+    public void aktualisiereVerdeckteFelder(int n){
+        this.anzahlVerdeckt=this.anzahlVerdeckt-n;
     }
-    
+
     public int getAnzahlBomben(){
         return anzahlBomben;
     }
@@ -111,42 +106,59 @@ public class Spielfeld
         return feld;
     }
 
-     public void deckeFreieNachbarnAufRekursiv(Feld start, List<Feld> neueFelder){
-        if (start.getNachbarnAnzahl()==0){
-            for(int[] richtung : richtungen){
-                int nr = start.getReihe() + richtung[0]; 
-                int ns = start.getSpalte() + richtung[1]; 
-                if(nr>=0 && nr<reihen && ns>=0 && ns<spalten){
-                    Feld fNachbar = felder[nr][ns];
-                    if (fNachbar.getFeldstatus() == Feldstatus.ZUGEDECKT){
-                        fNachbar.setFeldstatus(Feldstatus.AUFGEDECKT);
-                        neueFelder.add(fNachbar);
-                        deckeFreieNachbarnAufRekursiv(fNachbar, neueFelder);
-                    } 
-                }
+    public List<Feld> getNachbarFelder(Feld feld){
+        int[][] richtungen = {{-1,0},{1,0},{0,-1},{0,1},{-1,-1},{1,-1},{1,1},{-1,1}}; 
+        List<Feld> nachbarFelder = new ArrayList<>();
+        for(int[] richtung : richtungen){
+            int nr = feld.getReihe() + richtung[0]; 
+            int ns = feld.getSpalte() + richtung[1];
+            if(nr>=0 && nr<reihen && ns>=0 && ns<spalten){
+                Feld fNachbar = felder[nr][ns];
+                nachbarFelder.add(fNachbar);
+            }
+        }
+        return nachbarFelder;
+    }
+
+    public int getMarkierteNachbarnAnzahl(Feld feld){
+        int markiertAnzahl = 0;
+        List<Feld> nachbarFelder = getNachbarFelder(feld);
+        for(Feld fNachbar : nachbarFelder){
+            if (fNachbar.getFeldstatus() == Feldstatus.MARKIERT){
+                markiertAnzahl++;
+            } 
+        }
+        return markiertAnzahl;
+    }
+
+    public void deckeFreieNachbarnAufRekursiv(Feld start, List<Feld> neueFelder){
+        if (start.getNachbarBombenAnzahl()==0){
+            List<Feld> nachbarFelder = getNachbarFelder(start);
+            for(Feld fNachbar : nachbarFelder){
+                if (fNachbar.getFeldstatus() == Feldstatus.VERDECKT){
+                    fNachbar.setFeldstatus(Feldstatus.AUFGEDECKT);
+                    neueFelder.add(fNachbar);
+                    deckeFreieNachbarnAufRekursiv(fNachbar, neueFelder);
+                } 
             }
         }
     }
 
     public void deckeFreieNachbarnAuf(Feld start, List<Feld> neueFelder){
-        if (start.getNachbarnAnzahl()==0){
+        if (start.getNachbarBombenAnzahl()==0){
             boolean neuerNachbarGefunden = true;
             while(neuerNachbarGefunden){
                 neuerNachbarGefunden = false;
                 for (int r = 0; r<reihen; r++){
                     for (int s = 0; s<spalten; s++){
                         Feld f = felder[r][s];
-                        if (f.getFeldstatus()== Feldstatus.AUFGEDECKT && f.getNachbarnAnzahl()==0){
-                            for(int[] richtung : richtungen){
-                                int nr = r + richtung[0]; 
-                                int ns = s + richtung[1]; 
-                                if(nr>=0 && nr<reihen && ns>=0 && ns<spalten){
-                                    Feld fNachbar = felder[nr][ns];
-                                    if(fNachbar.getFeldstatus()== Feldstatus.ZUGEDECKT){
-                                        fNachbar.setFeldstatus(Feldstatus.AUFGEDECKT); 
-                                        neueFelder.add(fNachbar);
-                                        neuerNachbarGefunden = true;
-                                    }
+                        if (f.getFeldstatus()== Feldstatus.AUFGEDECKT && f.getNachbarBombenAnzahl()==0){
+                            List<Feld> nachbarFelder = getNachbarFelder(start);
+                            for(Feld fNachbar : nachbarFelder){
+                                if(fNachbar.getFeldstatus()== Feldstatus.VERDECKT){
+                                    fNachbar.setFeldstatus(Feldstatus.AUFGEDECKT); 
+                                    neueFelder.add(fNachbar);
+                                    neuerNachbarGefunden = true;
                                 }
                             }
                             if (neuerNachbarGefunden){
