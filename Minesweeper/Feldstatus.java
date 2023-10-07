@@ -1,9 +1,9 @@
 
 /**
- * Beschreiben Sie hier die Aufzählungsklasse Feldstatus.
+ * Die Aufzählungsklasse Feldstatus beeinhaltet die möglichen Status eines Feldes.
  * 
- * @author (Tim Busch, Beatrice Wellmann) 
- * @version (1)
+ * @author Tim Busch, Beatrice Wellmann
+ * @version 1
  */
 public enum Feldstatus
 {

@@ -1,9 +1,9 @@
 
 /**
- * Beschreiben Sie hier die Aufzählungsklasse Status.
+ * Die Aufzählungsklasse Spielstatus beeinhaltet die möglichen Status des Spiels.
  * 
- * @author (Tim Busch, Beatrice Wellmann) 
- * @version (1)
+ * @author Tim Busch, Beatrice Wellmann
+ * @version 1
  */
 public enum Spielstatus
 {

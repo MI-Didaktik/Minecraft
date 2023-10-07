@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Beschreiben Sie hier die Klasse Spielfeld.
+ * Die Klasse Spielfeld dient der Verwaltung der Felder des Spielfeldes. 
+ * Ein Spielfeld besteht aus mehreren Objekten der Klasse Feld. 
  * 
  * @author Tim Busch, Beatrice Wellmann 
  * @version 1
@@ -19,6 +20,9 @@ public class Spielfeld
 
     /**
      * Konstruktor für Objekte der Klasse Spielfeld
+     * @param anzahlBomben die Anzahl der platzierten Bomben 
+     * @param reihen die Anzahl der Reihen des erzeugten Spielfelds
+     * @param spalten die Anzahl der Reihen des erzeugten Spielfelds
      */
     public Spielfeld(int anzahlBomben, int reihen, int spalten)
     {
@@ -30,20 +34,19 @@ public class Spielfeld
         erzeugeFeld(); 
     }
 
-    public int getReihen(){
-        return reihen;
-    }
-
-    public int getSpalten(){
-        return spalten;
-    }
-
+    /**
+     * Erzeugt ein Spielfeld. Hierfür werden die Felder initialisiert, 
+     * die Bomben erzeugt und in den Feldern wird der Wert nachbarBombenAnzahl gesetzt.
+     */
     public void erzeugeFeld(){
         initialisiereFelder();
         erzeugeBomben(); 
         zaehleNachbarn();
     }
 
+    /**
+     * Füllt das Array felder mit Objekten der Klasse Feld. 
+     */
     private void initialisiereFelder(){
         for(int r=0; r<reihen; r++){
             for(int s=0; s<spalten; s++){
@@ -52,6 +55,9 @@ public class Spielfeld
         }
     }
 
+    /**
+     * Erzeugt an zufälligen Positionen des Spielfelds Bomben. 
+     */
     private void erzeugeBomben(){
         Random random = new Random(); 
         for(int i=0; i<anzahlBomben; i++){
@@ -66,6 +72,10 @@ public class Spielfeld
         }
     }
 
+    /**
+     * Zählt für jedes Feld die Anzahl der benachbarten Feldern, welche 
+     * eine Bombe haben. 
+     */
     private void zaehleNachbarn(){
         for(int r=0; r<reihen; r++){
             for(int s=0; s<spalten; s++){
@@ -82,22 +92,19 @@ public class Spielfeld
         }
     }
 
-    public int getAnzahlVerdeckt(){
-        return anzahlVerdeckt;
-    }
-
+    /**
+     * Aktualisiert die Anzahl der Verdeckten Felder.
+     * @param n die Anzahl der neu aufgedeckten Felder
+     */
     public void aktualisiereVerdeckteFelder(int n){
         this.anzahlVerdeckt=this.anzahlVerdeckt-n;
     }
 
-    public int getAnzahlBomben(){
-        return anzahlBomben;
-    }
-
-    public Feld[][] getFelder(){
-        return felder;
-    }
-
+    /**
+     * Liefert das Feld Objekt an einer bestimmten Stelle.
+     * @param r die Reihe in der das Feld liegt
+     * @param s die Spalte in der das Feld liegt
+     */
     public Feld getFeld(int r, int s){
         Feld feld = null;
         if (r>=0 && r<reihen && s>=0 && s<spalten){
@@ -106,6 +113,11 @@ public class Spielfeld
         return feld;
     }
 
+    /**
+     * Liefert für ein bestimmtes Feld alle benachbarten Feld-Objekte.
+     * @param feld das Feld für welches die Nachbarn geliefert werden sollen
+     * @return Liste mit den benachbarten Feldern
+     */
     public List<Feld> getNachbarFelder(Feld feld){
         int[][] richtungen = {{-1,0},{1,0},{0,-1},{0,1},{-1,-1},{1,-1},{1,1},{-1,1}}; 
         List<Feld> nachbarFelder = new ArrayList<>();
@@ -120,6 +132,12 @@ public class Spielfeld
         return nachbarFelder;
     }
 
+    /**
+     * Liefert die Anzahl der markierten Nachbarn eines Feldes. 
+     * @param feld das Feld für welches die Anzahl der markierten Nachbarn
+     * geliefert werden soll 
+     * @return Anzahl der markierten Nachbarfelder
+     */
     public int getMarkierteNachbarnAnzahl(Feld feld){
         int markiertAnzahl = 0;
         List<Feld> nachbarFelder = getNachbarFelder(feld);
@@ -131,6 +149,14 @@ public class Spielfeld
         return markiertAnzahl;
     }
 
+    /**
+     * Deckt beim Anklicken eines Feldes alle benachbarten Felder auf, bei welchen 
+     * nachbarBombenAnzahl den Wert 0 hat. Für die dabei aufgedeckten Felder wird das 
+     * wiederholt, so lange bis keine solchen benachbarten Felder mehr existieren.
+     * Die Methode nutzt hierzu Rekursion. 
+     * @param start das Feld welches aufgedeckt wurde
+     * @param neueFelder eine Liste in der die von der Methode neu aufgedeckten Felder gespeichert werden
+     */
     public void deckeFreieNachbarnAufRekursiv(Feld start, List<Feld> neueFelder){
         if (start.getNachbarBombenAnzahl()==0){
             List<Feld> nachbarFelder = getNachbarFelder(start);
@@ -144,6 +170,14 @@ public class Spielfeld
         }
     }
 
+    /**
+     * Deckt beim Anklicken eines Feldes alle benachbarten Felder auf, bei welchen 
+     * nachbarBombenAnzahl den Wert 0 hat. Für die dabei aufgedeckten Felder wird das 
+     * wiederholt, so lange bis keine solchen benachbarten Felder mehr existieren.
+     * Die Methode nutzt hierzu keine Rekursion. 
+     * @param start das Feld welches aufgedeckt wurde
+     * @param neueFelder eine Liste, in der die von der Methode neu aufgedeckten Felder gespeichert werden
+     */
     public void deckeFreieNachbarnAuf(Feld start, List<Feld> neueFelder){
         if (start.getNachbarBombenAnzahl()==0){
             boolean neuerNachbarGefunden = true;
@@ -169,5 +203,46 @@ public class Spielfeld
                 }
             }
         }
+    }
+   
+    /**
+     * Liefert die Anzahl der Reihen des Spielfelds. 
+     * @return Anzahl der Reihen
+     */
+    public int getReihen(){
+        return reihen;
+    }
+
+    /**
+     * Liefert die Anzahl der Spalten des Spielfelds. 
+     * @return Anzahl der Spalten
+     */
+    public int getSpalten(){
+        return spalten;
+    }
+    
+    /**
+     * Liefert die Anzahl der noch nicht aufgedeckten Felder
+     * auf dem Spielfeld. 
+     * @return Anzahl der verdeckten Felder
+     */
+    public int getAnzahlVerdeckt(){
+        return anzahlVerdeckt;
+    }
+    
+    /**
+     * Liefert die Anzahl der Bomben auf dem Spielfeld. 
+     * @return Anzahl der Bomben
+     */
+    public int getAnzahlBomben(){
+        return anzahlBomben;
+    }
+
+    /**
+     * Liefert die Felder des Spielfelds.
+     * @return die Felder des Spielfelds
+     */
+    public Feld[][] getFelder(){
+        return felder;
     }
 }

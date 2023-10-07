@@ -1,4 +1,4 @@
 #BlueJ class context
 comment0.target=Feldstatus
-comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Aufz\u00E4hlungsklasse\ Feldstatus.\r\n\ \r\n\ @author\ (Tim\ Busch,\ Beatrice\ Wellmann)\ \r\n\ @version\ (1)\r\n
+comment0.text=\r\n\ Die\ Aufz\u00E4hlungsklasse\ Feldstatus\ beeinhaltet\ die\ m\u00F6glichen\ Status\ eines\ Feldes.\r\n\ \r\n\ @author\ Tim\ Busch,\ Beatrice\ Wellmann\r\n\ @version\ 1\r\n
 numComments=1
