@@ -104,6 +104,7 @@ public class Spielfeld
      * Liefert das Feld Objekt an einer bestimmten Stelle.
      * @param r die Reihe in der das Feld liegt
      * @param s die Spalte in der das Feld liegt
+     * @return feld
      */
     public Feld getFeld(int r, int s){
         Feld feld = null;

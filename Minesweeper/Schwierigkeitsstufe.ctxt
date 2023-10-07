@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Schwierigkeitsstufe
+comment0.text=\r\n\ Die\ Aufz\u00E4hlungsklasse\ Schwierigkeitsstufe\ beeinhaltet\ f\u00FCr\ jede\ der\ Schwierigkeitsstufen\ die\ Anzahl\ Reihen,\ Spalten\ und\ Bomben\ \r\n\ sowie\ die\ gr\u00F6\u00DFtm\u00F6gliche\ Punktzahl,\ die\ f\u00FCr\ diese\ Stufe\ erreicht\ werden\ kann.\r\n\ \r\n\ @author\ Tim\ Busch,\ Beatrice\ Wellmann\r\n\ @version\ 1\r\n
+comment1.params=reihen\ spalten\ bomben\ hoechstpunkte
+comment1.target=Schwierigkeitsstufe(int,\ int,\ int,\ long)
+comment1.text=\r\n\ Konstruktor\ f\u00FCr\ Objekte\ der\ Aufz\u00E4hlungsklasse\ Schwierigkeitsstufe\r\n\ @param\ reihen\ die\ Anzahl\ Reihen\ des\ Spielfelds\r\n\ @param\ spalten\ die\ Anzahl\ Spalten\ des\ Spielfelds\r\n\ @param\ bomben\ die\ Anzahl\ Bomben\ des\ Spielfelds\r\n\ @param\ hoechstpunkte\ die\ h\u00F6chste\ zu\ erreichende\ Punktzahl\r\n
+comment2.params=
+comment2.target=int\ getReihen()
+comment2.text=\r\n\ Liefert\ die\ gesetzte\ Anzahl\ Reihen\ f\u00FCr\ die\ Schwierigkeitsstufe\r\n\ @return\ reihen\r\n
+comment3.params=
+comment3.target=int\ getSpalten()
+comment3.text=\r\n\ Liefert\ die\ gesetzte\ Anzahl\ Spalten\ f\u00FCr\ die\ Schwierigkeitsstufe\r\n\ @return\ spalten\r\n
+comment4.params=
+comment4.target=int\ getBomben()
+comment4.text=\r\n\ Liefert\ die\ gesetzte\ Anzahl\ Bomben\ f\u00FCr\ die\ Schwierigkeitsstufe\r\n\ @return\ bomben\r\n
+comment5.params=
+comment5.target=long\ getHoechstpunkte()
+comment5.text=\r\n\ Liefert\ die\ maximal\ erreichbaren\ Punkte\ f\u00FCr\ die\ Schwierigkeitsstufe\r\n\ @return\ hoechstpunkte\r\n
+numComments=6

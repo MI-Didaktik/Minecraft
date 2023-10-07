@@ -49,10 +49,12 @@ public class Feld
 
     /**
      * Liefert das Bild des Feldes.
+     * @param breite die Breite des Bildes
+     * @param hoehe die Höhe des Bildes
      * @return das Bild des Feldes
      */
-    public Image getBild(){
-        return new Image("bilder/"+getBildName()+".png"); 
+    public Image getBild(int breite, int hoehe){
+        return new Image("bilder/" + getBildName() + ".png",breite,hoehe,false,false);
     }
 
     /**
