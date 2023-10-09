@@ -70,7 +70,6 @@ public class Spiel {
             }
         }
         return neueFelder;
-        // TODO: stoppe timer, highscore....
     }
 
     /**
@@ -79,7 +78,7 @@ public class Spiel {
      * 
      * @param feld Feld von welchem der Status verändert werden soll
      */
-    public void markiere(Feld feld) {
+    public void markiereOderVerdecke(Feld feld) {
         if (feld.getFeldstatus() == Feldstatus.VERDECKT) {
             feld.setFeldstatus(Feldstatus.MARKIERT);
             markierteFelder++;

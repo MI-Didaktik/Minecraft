@@ -155,7 +155,7 @@ public class Controller {
                                 aktualisiereBild(f, b);
                             }
                         } else if (event.getButton() == MouseButton.SECONDARY) { // Rechtsklick
-                            spiel.markiere(feld);
+                            spiel.markiereOderVerdecke(feld);
                             aktualisiereBild(feld, button);
                         }
                         aktualisiereOberflaeche();

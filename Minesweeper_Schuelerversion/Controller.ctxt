@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Controller
+comment0.text=\r\n\ \r\n\ @author\ \r\n\ @version\ \r\n
+comment1.params=event
+comment1.target=void\ start(javafx.event.ActionEvent)
+comment2.params=
+comment2.target=void\ fuelleSpielfeld()
+comment3.params=button\ reihe\ spalte
+comment3.target=void\ mausListenerHinzufuegen(javafx.scene.control.Button,\ int,\ int)
+comment4.params=button
+comment4.target=void\ aktualisiereBild(javafx.scene.control.Button)
+comment5.params=
+comment5.target=void\ aktualisiereStatusBild()
+numComments=6

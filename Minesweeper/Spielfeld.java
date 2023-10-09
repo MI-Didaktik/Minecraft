@@ -29,7 +29,7 @@ public class Spielfeld {
         this.spalten = spalten;
         this.anzahlBomben = anzahlBomben;
         anzahlVerdeckt = reihen * spalten;
-        erzeugeFeld();
+        erzeugeSpielFeld();
     }
 
     /**
@@ -199,16 +199,16 @@ public class Spielfeld {
      * Erzeugt ein Spielfeld. Hierfür werden die Felder initialisiert, die Bomben
      * erzeugt und in den Feldern wird der Wert nachbarBombenAnzahl gesetzt.
      */
-    private void erzeugeFeld() {
-        initialisiereFelder();
+    private void erzeugeSpielFeld() {
+        erzeugeFelder();
         erzeugeBomben();
-        zaehleNachbarn();
+        zaehleNachbarnProFeld();
     }
 
     /**
      * Fuellt das Array felder mit Objekten der Klasse Feld.
      */
-    private void initialisiereFelder() {
+    private void erzeugeFelder() {
         for (int r = 0; r < reihen; r++) {
             for (int s = 0; s < spalten; s++) {
                 felder[r][s] = new Feld(r, s);
@@ -234,9 +234,9 @@ public class Spielfeld {
     }
 
     /**
-     * Zaehlt für jedes Feld die Anzahl der benachbarten Feldern, welche eine Bombe haben.
+     * Zaehlt fuer jedes Feld die Anzahl der benachbarten Feldern, welche eine Bombe haben.
      */
-    private void zaehleNachbarn() {
+    private void zaehleNachbarnProFeld() {
         for (int r = 0; r < reihen; r++) {
             for (int s = 0; s < spalten; s++) {
                 int nachbarBomben = 0;

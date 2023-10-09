@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=MinesweeperGUI
+comment0.text=\r\n\ \r\n\ @author\ \r\n\ @version\ \r\n
+comment1.params=primaryStage
+comment1.target=void\ start(javafx.stage.Stage)
+comment1.text=\r\n\ L\u00E4dt\ die\ Datei\ minesweeper.fxml\ und\ erzeugt\ das\ zugeh\u00F6rige\ Fenster.\r\n\ @param\ primaryStage\ \r\n
+numComments=2

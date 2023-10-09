@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Schwierigkeitsstufe
+comment0.text=\r\n\ @author\ \r\n\ @version\ \r\n
+comment1.params=reihen\ spalten\ bomben
+comment1.target=Schwierigkeitsstufe(int,\ int,\ int)
+comment2.params=
+comment2.target=int\ getReihen()
+comment3.params=
+comment3.target=int\ getSpalten()
+comment4.params=
+comment4.target=int\ getBomben()
+numComments=5
