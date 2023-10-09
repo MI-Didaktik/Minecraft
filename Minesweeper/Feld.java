@@ -1,8 +1,8 @@
 import javafx.scene.image.Image;
 /**
- * Die Klasse Feld dient der Verwaltung der einzelnen Felder, welche sich im 
- * Spielfeld befinden. Bei diesen kann es sich entweder um ein verdecktes, ein aufgedecktes
- * oder ein verdecktes markiertes Feld handeln. Felder können eine Bombe haben. 
+ * Die Klasse Feld dient der Verwaltung der einzelnen Felder, welche sich im Spielfeld befinden. 
+ * Bei diesen kann es sich entweder um ein verdecktes, ein aufgedecktes oder ein verdecktes markiertes Feld handeln. 
+ * Felder können eine Bombe haben. 
  * 
  * @author Tim Busch, Beatrice Wellmann
  * @version 1
@@ -30,31 +30,14 @@ public class Feld
     }
 
     /**
-     * Liefert den Namen des zu verwendenden Bildes (Frei, Markiert oder Explosion) 
-     * in Abhängigkeit vom Feldstatus (AUFGEDECKT, MARKIERT oder VERDECKT)
-     */
-    private String getBildName(){
-        switch(feldstatus){
-            case VERDECKT: return "Frei";  
-            case MARKIERT: return "Markiert";  
-            default: 
-                if(istBombe) {
-                    return "Explosion";
-                } 
-                else {
-                    return (""+nachbarBombenAnzahl);
-                }
-        }
-    }
-
-    /**
      * Liefert das Bild des Feldes.
      * @param breite die Breite des Bildes
      * @param hoehe die Höhe des Bildes
+     * @param spielstatus
      * @return das Bild des Feldes
      */
-    public Image getBild(int breite, int hoehe){
-        return new Image("bilder/" + getBildName() + ".png",breite,hoehe,false,false);
+    public Image getBild(int breite, int hoehe, Spielstatus spielstatus){
+        return new Image("bilder/" + getBildName(spielstatus) + ".png",breite,hoehe,false,false);
     }
 
     /**
@@ -79,15 +62,15 @@ public class Feld
     public int getNachbarBombenAnzahl(){
         return nachbarBombenAnzahl;
     }
-    
+
     /**
      * Setzt den Wert nachbarBombenAnzahl für das Feld.
-     * @param die gewünschte Anzahl an Bomben
+     * @param anzahl die gewünschte Anzahl an Bomben
      */
     public void setNachbarBombenAnzahl(int anzahl){
         nachbarBombenAnzahl = anzahl; 
     }
-    
+
     /**
      * Liefert den Status des Feldes (AUFGEDECKT, MARKIERT oder VERDECKT). 
      * @return der Status des Feldes
@@ -95,15 +78,15 @@ public class Feld
     public Feldstatus getFeldstatus(){
         return this.feldstatus;
     }
-    
+
     /**
      * Setzt den Status des Feldes. 
-     * @param der gewünschte Status (AUFGEDECKT, MARKIERT oder VERDECKT)
+     * @param status der gewünschte Status (AUFGEDECKT, MARKIERT oder VERDECKT)
      */
-    public void setFeldstatus(Feldstatus s){
-        this.feldstatus = s;
+    public void setFeldstatus(Feldstatus status){
+        this.feldstatus = status;
     }
-    
+
     /**
      * Liefert die Reihe, in der das Feld liegt. 
      * @return die Reihe, in der das Feld liegt
@@ -111,13 +94,36 @@ public class Feld
     public int getReihe(){
         return reihe;
     }
-    
+
     /**
      * Liefert die Spalte, in der das Feld liegt. 
      * @return die Spalte, in der das Feld liegt
      */
     public int getSpalte(){
         return spalte;
+    }
+
+    /**
+     * Liefert den Namen des zu verwendenden Bildes (Frei, Markiert oder Explosion) 
+     * in Abhängigkeit vom Feldstatus (AUFGEDECKT, MARKIERT oder VERDECKT) und Spielstatus (GEWONNEN)
+     * @param spielstatus
+     * @return bildname
+     */
+    private String getBildName(Spielstatus spielstatus){
+        switch(feldstatus){
+            case VERDECKT: return "Frei";  
+            case MARKIERT: return "Markiert";  
+            default: 
+                if(istBombe && spielstatus == Spielstatus.GEWONNEN) {
+                    return "Bombe";
+                } 
+                else if (istBombe){
+                    return "Explosion";
+                }
+                else {
+                    return (""+nachbarBombenAnzahl);
+                }
+        }
     }
 
 }

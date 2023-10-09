@@ -19,19 +19,15 @@ import javafx.geometry.Insets;
 import java.util.Map;
 
 /**
- * Beschreiben Sie hier die Klasse Controller.
+ * Dies ist die Klasse Controller, welche alle Interaktionen mit der
+ * Nutzeroberflaeche handhabt. Hier kann auf die Objekte aus der .fxml-Datei,
+ * welche mit der @FXML-Annotation gekennzeichnet werden zugegriffen werden.
  * 
  * @author Tim Busch, Beatrice Wellmann
  * @version 1
  */
 
 public class Controller {
-    @FXML
-    private Button leichtButton;
-    @FXML
-    private Button mittelButton;
-    @FXML
-    private Button schwerButton;
     @FXML
     private GridPane spielfeldGrid;
     @FXML
@@ -47,82 +43,68 @@ public class Controller {
 
     private Spiel spiel;
     private Spielfeld spielfeld;
-    private long startZeit;
+
     private Button[][] buttons;
     private int bildBreite = 20;
     private int bildHoehe = 20;
-    private long highscore = 0;
 
+    private long highscore = 0;
+    private long startZeit;
+
+    /**
+     * Wird bei Aktivierung des Buttons Leicht ausgefuehrt und startet das Spiel auf der Schwierigkeitsstufe LEICHT.
+     * @param event
+     */
     @FXML
     void startLeicht(ActionEvent event) throws IOException {
-        start(Schwierigkeitsstufe.LEICHT);		
+        start(Schwierigkeitsstufe.LEICHT);
     }
 
+    /**
+     * Wird bei Aktivierung des Buttons Mittel ausgefuehrt und startet das Spiel auf der Schwierigkeitsstufe MITTEL.
+     * @param event
+     */
     @FXML
     void startMittel(ActionEvent event) throws IOException {
-        start(Schwierigkeitsstufe.MITTEL);		
+        start(Schwierigkeitsstufe.MITTEL);
     }
 
+    /**
+     * Wird bei Aktivierung des Buttons Schwer ausgefuehrt und startet das Spiel auf der Schwierigkeitsstufe SCHWER.
+     * @param event
+     */
     @FXML
     void startSchwer(ActionEvent event) throws IOException {
-        start(Schwierigkeitsstufe.SCHWER);		
+        start(Schwierigkeitsstufe.SCHWER);
     }
 
-    private void start(Schwierigkeitsstufe schwierigkeitsstufe) throws IOException {
-        spiel = new Spiel(this, schwierigkeitsstufe);
+    /**
+     * Erzeugt eine neue Instanz der Klasse Spiel, haelt die startZeit fest und
+     * erzeugt ein neues Spielfeld mitsamt Anpassung der Textfelder und Label auf der Nutzeroberflaeche
+     * @param schwierigkeitsstufe
+     */
+    private void start(Schwierigkeitsstufe schwierigkeitsstufe) {
+        spiel = new Spiel(schwierigkeitsstufe);
         spielfeld = spiel.getSpielfeld();
         startZeit = System.currentTimeMillis();
-        aktualisiereSpielstatus();
-        fuelleSpielfeld();		
+
+        fuelleSpielfeld();
+        statusLabel.setVisible(false);
+        spiel.setSpielstatus(Spielstatus.LAUFEND);
+        aktualisiereOberflaeche();
     }
 
-    private void aktualisiereBombenTextfeld() {
-        int restBomben = spielfeld.getAnzahlBomben() - spiel.getMarkierteFelder();
-        bombeTextfeld.setText("" + restBomben);
-    }
-
-    private long berechnePunkte() {
-        long zeitdifferenz = (System.currentTimeMillis() - startZeit) / 1000;
-        long aktuellePunkte = spiel.getSchwierigkeitsstufe().getHoechstpunkte()-zeitdifferenz;
-        long punkte = Math.max(aktuellePunkte,0);
-        return punkte;
-    }
-
-    private void aktualisiereHighscore(){
-        long punkte = berechnePunkte();
-        highscore = Math.max(highscore, punkte);
-        highscoreTextfeld.setText(""+highscore);
-    }
-
-    private void aktualisiereStatusBild(){
-        Spielstatus status = spiel.getSpielstatus();
-        Image bild = new Image("bilder/" + status.name() + ".png", bildHoehe*2, bildBreite*2, true, false);
-        statusBild.setImage(bild);
-    }
-
-    public void aktualisiereSpielstatus() {
-        Spielstatus status = spiel.getSpielstatus();
-        aktualisiereStatusBild();
-        aktualisiereBombenTextfeld();
-        punkteTextfeld.setText(""+berechnePunkte());
-        if (status == Spielstatus.GEWONNEN) {
-            deckeSpielfeldAuf();
-            statusLabel.setText("Du hast gewonnen!");
-            statusLabel.setVisible(true);
-            aktualisiereHighscore();
-        } else if (status == Spielstatus.VERLOREN) {
-            deckeSpielfeldAuf();
-            statusLabel.setText("Du hast verloren!");
-            statusLabel.setVisible(true);
-        } else {
-            statusLabel.setVisible(false);
-        }
-    }
-
+    /**
+     * Fuellt das spielfeldGrid mit Buttons. 
+     * Jedem Button ist ein Feld-Objekt zugeordnet und ein Bild, welches von dem Feldstatus ahaengig ist. 
+     * Um auf diese Feld-Buttons zugreifen zu koennen, werden sie in der Liste buttons abgespeichert.
+     */
     private void fuelleSpielfeld() {
+        // leert das spielfeld
         spielfeldGrid.getChildren().clear();
         spielfeldGrid.getRowConstraints().clear();
         spielfeldGrid.getColumnConstraints().clear();
+
         int reihen = spielfeld.getReihen();
         int spalten = spielfeld.getSpalten();
         buttons = new Button[reihen][spalten];
@@ -132,70 +114,151 @@ public class Controller {
                 Button fButton = new Button();
                 mausListenerHinzufuegen(fButton, r, s);
                 spielfeldGrid.add(fButton, s, r);
-                setzeBildFuerButton(fButton, feld.getBild(bildBreite, bildHoehe));
+                aktualisiereBild(feld, fButton);
                 buttons[r][s] = fButton;
             }
-        }		
-        ((Stage)spielfeldGrid.getScene().getWindow()).sizeToScene();
-    }
-
-    public void deckeSpielfeldAuf() {
-        for (int r = 0; r < spielfeld.getReihen(); r++) {
-            for (int s = 0; s < spielfeld.getSpalten(); s++) {
-                Feld feld = spielfeld.getFelder()[r][s];
-                if (feld.getFeldstatus() != Feldstatus.AUFGEDECKT) {
-                    feld.setFeldstatus(Feldstatus.AUFGEDECKT);
-                }
-                Button b = buttons[r][s];
-                aktualisiereBild(feld, b);
-            }
         }
+
+        // passt das Fenster an die Spielfeldgr��e an
+        ((Stage) spielfeldGrid.getScene().getWindow()).sizeToScene();
     }
 
-    private void aktualisiereBild(Feld feld, Button fButton) {
-        Image bild = feld.getBild(bildBreite, bildHoehe);
-        setzeBildFuerButton(fButton, bild);
-    }
+    /**
+     * Fuegt einem Button einen Listener hinzu, welcher definiert was passiert, wenn dieser Button angeklickt wird. 
+     * Wenn der Spielstatus LAUFEND entspricht, wird zwischen Links- und Rechtsklick unterschieden. 
+     * Bei einfachem Linksklick wird ein markiertes oder verdecktes Feld aufgedeckt. 
+     * Bei Doppel-Linksklick auf ein aufgedecktes Feld werden alle verdeckten Nachbarfelder aufgedeckt, wenn bereits ausreichend Nachbarfelder markiert wurden.
+     * Bei Rechtsklick wird ein verdecktes Feld markiert bzw. ein markiertes Feld wieder verdeckt.
+     * Anschliessend wird die Oberflaeche aktualisiert.
+     * @param button
+     * @param reihe
+     * @param spalte
+     * @see aktualisiereOberflache()
+     */
+    private void mausListenerHinzufuegen(Button button, int reihe, int spalte) {
+        // fuegt einem button die Funktion hinzu, die bei Mausklick ausgefuehrt werden soll
+        button.setOnMouseClicked(event -> {
 
-    private void setzeBildFuerButton(Button button, Image bild) {
-        ImageView view = new ImageView();
-        view.setImage(bild);
-        statusBild.setFitHeight(bildHoehe);
-        statusBild.setFitWidth(bildBreite);
-        statusBild.preserveRatioProperty();
-        button.setGraphic(view);
-    }
-
-    private void mausListenerHinzufuegen(Button fButton, int r, int s) {
-        fButton.setOnMouseClicked(event -> {
-                    Feld feld = spielfeld.getFeld(r, s);
-                    if (spiel.getSpielstatus().equals(Spielstatus.NICHTGESTARTET)) {
-                        spiel.setSpielstatus(Spielstatus.LAUFEND);
-                    }
-                    if (spiel.getSpielstatus().equals(Spielstatus.LAUFEND)) {
-                        if (event.getButton() == MouseButton.PRIMARY) {
+                    Feld feld = spielfeld.getFeld(reihe, spalte);
+                    if (spiel.getSpielstatus() == Spielstatus.LAUFEND) {
+                        if (event.getButton() == MouseButton.PRIMARY) { // Linksklick
                             List<Feld> neueFelder = new ArrayList<>();
-                            if (!feld.getFeldstatus().equals(Feldstatus.AUFGEDECKT)) {
+                            if (feld.getFeldstatus() != Feldstatus.AUFGEDECKT) {
                                 neueFelder = spiel.deckeAuf(feld);
-                            } else if (event.getClickCount() == 2) {
+                            } else if (event.getClickCount() == 2) { // Doppelklick
                                 if (spielfeld.getMarkierteNachbarnAnzahl(feld) == feld.getNachbarBombenAnzahl()) {
                                     neueFelder = spiel.deckeVerdeckteNachbarnAuf(feld);
                                 }
                             }
-                            if (spiel.getSpielstatus().equals(Spielstatus.LAUFEND)) {
-                                for (Feld f : neueFelder) {
-                                    Button b = buttons[f.getReihe()][f.getSpalte()];
-                                    aktualisiereBild(f, b);
-                                }
-                                aktualisiereSpielstatus();
+                            for (Feld f : neueFelder) {
+                                Button b = buttons[f.getReihe()][f.getSpalte()];
+                                aktualisiereBild(f, b);
                             }
-                        } else if (event.getButton() == MouseButton.SECONDARY) {
+                        } else if (event.getButton() == MouseButton.SECONDARY) { // Rechtsklick
                             spiel.markiere(feld);
-                            aktualisiereBild(feld, fButton);
-                            aktualisiereSpielstatus();
+                            aktualisiereBild(feld, button);
                         }
+                        aktualisiereOberflaeche();
                     }
+
             });
+    }
+
+    /**
+     * aktualisiert das Smiley, welches den Spielstatus (GEWONNEN, VERLOREN,
+     * LAUFEND, NICHTGESTARTET) anzeigt aktualisiert die Anzahl momentan verdeckter
+     * Bomben und die aktuelle Punktzahl Ist das Spiel gewonnen oder verloren, so
+     * wird das Spielfeld aufgedeckt und eine Nachricht angezeigt. Ist das Spiel
+     * gewonnen, so wird zusaetzlich ggf. der Highscore aktualisiert.
+     */
+    private void aktualisiereOberflaeche() {
+        Spielstatus status = spiel.getSpielstatus();
+        aktualisiereStatusBild();
+        aktualisiereBombenTextfeld();
+        punkteTextfeld.setText("" + berechnePunkte());
+        if (status == Spielstatus.GEWONNEN) {
+            deckeSpielfeldAuf();
+            statusLabel.setText("Du hast gewonnen!");
+            statusLabel.setVisible(true);
+            aktualisiereHighscore();
+        } else if (status == Spielstatus.VERLOREN) {
+            deckeSpielfeldAuf();
+            statusLabel.setText("Du hast verloren!");
+            statusLabel.setVisible(true);
+        }
+    }
+
+    /**
+     * Aktualisiert das auf einem Feld-Button angezeigte Bild.
+     * 
+     * @param feld
+     * @param button
+     */
+    private void aktualisiereBild(Feld feld, Button button) {
+        Image bild = feld.getBild(bildBreite, bildHoehe, spiel.getSpielstatus());
+        ImageView view = new ImageView();
+        view.setImage(bild);
+        button.setGraphic(view);
+    }
+
+    /**
+     * Aktualisiert das Textfeld, welches die Anzahl momentan noch nicht markierter
+     * Bomben anzeigt.
+     */
+    private void aktualisiereBombenTextfeld() {
+        int restBomben = spielfeld.getAnzahlBomben() - spiel.getMarkierteFelder();
+        bombeTextfeld.setText("" + restBomben);
+    }
+
+    /**
+     * Aktualisiert das Smiley, welches den Spielstatus (GEWONNEN, VERLOREN,
+     * LAUFEND, NICHTGESTARTET) anzeigt
+     */
+    private void aktualisiereStatusBild() {
+        Spielstatus status = spiel.getSpielstatus();
+        Image bild = new Image("bilder/" + status.name() + ".png", bildHoehe * 2, bildBreite * 2, true, false);
+        statusBild.setImage(bild);
+    }
+
+    /**
+     * Aktualisiert das Highscore-Feld, welches den seit Start des Fensters
+     * erreichten Highscore anzeigt. Ist die erreichte Punktzahl hoeher als der
+     * Highscore, so wird dieser angepasst.
+     */
+    private void aktualisiereHighscore() {
+        long punkte = berechnePunkte();
+        highscore = Math.max(highscore, punkte);
+        highscoreTextfeld.setText("" + highscore);
+    }
+
+    /**
+     * Berechnet die Anzahl momentan erreichter Punkte aus der durch die
+     * Schwierigkeitsstufe vorgegebene Hoechstpunktzahl und der seit dem Start
+     * vergangenen Zeit.
+     * 
+     * @return punkte
+     */
+    private long berechnePunkte() {
+        long zeitdifferenz = (System.currentTimeMillis() - startZeit) / 1000;
+        long aktuellePunkte = spiel.getSchwierigkeitsstufe().getHoechstpunkte() - zeitdifferenz;
+        long punkte = Math.max(aktuellePunkte, 0);
+        return punkte;
+    }
+
+    /**
+     * Deckt das gesamte Spielfeld auf.
+     */
+    private void deckeSpielfeldAuf() {
+        for (int reihe = 0; reihe < spielfeld.getReihen(); reihe++) {
+            for (int spalte = 0; spalte < spielfeld.getSpalten(); spalte++) {
+                Feld feld = spielfeld.getFelder()[reihe][spalte];
+                if (feld.getFeldstatus() != Feldstatus.AUFGEDECKT) {
+                    feld.setFeldstatus(Feldstatus.AUFGEDECKT);
+                    Button button = buttons[reihe][spalte];
+                    aktualisiereBild(feld, button);
+                }
+            }
+        }
     }
 
 }

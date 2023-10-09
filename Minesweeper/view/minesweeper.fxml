@@ -51,7 +51,7 @@
       </HBox>
       <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="statusLabel" alignment="CENTER" prefHeight="17.0" prefWidth="325.0" text="Du hast gewonnen!" textFill="#24789d" visible="false" VBox.vgrow="ALWAYS">
+            <Label fx:id="statusLabel" alignment="CENTER" prefHeight="17.0" prefWidth="325.0" text="Wähle eine Schwierigkeitsstufe!" textFill="#24789d" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="19.0" />
                </font>
@@ -79,9 +79,9 @@
       </Separator>
       <HBox prefWidth="1051.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="leichtButton" mnemonicParsing="false" onAction="#startLeicht" text="Leicht" />
-            <Button fx:id="mittelButton" mnemonicParsing="false" onAction="#startMittel" text="Mittel" />
-            <Button fx:id="schwerButton" mnemonicParsing="false" onAction="#startSchwer" text="Schwer" />
+            <Button mnemonicParsing="false" onAction="#startLeicht" text="Leicht" />
+            <Button mnemonicParsing="false" onAction="#startMittel" text="Mittel" />
+            <Button mnemonicParsing="false" onAction="#startSchwer" text="Schwer" />
             <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="31.0" prefWidth="74.0" text="Highscore" textAlignment="RIGHT">
                <HBox.margin>
                   <Insets left="40.0" />

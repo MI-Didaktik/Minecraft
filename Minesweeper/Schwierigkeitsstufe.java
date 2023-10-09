@@ -8,7 +8,7 @@
  */
 public enum Schwierigkeitsstufe
 {
-    LEICHT(5,5,5,120), MITTEL(7,7,13,300), SCHWER(10,10,20,420);
+    LEICHT(5,5,5,120), MITTEL(7,7,13,300), SCHWER(10,10,20,450);
     
     private final int reihen;
     private final int spalten;

@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 /**
- * Beschreiben Sie hier die Klasse MinesweeperGUI.
+ * Dies ist die Klasse MinesweeperGUI, welche zum Start des Spiels und das Laden der fxml-Datei benötigt wird.
  * 
  * @author Tim Busch, Beatrice Wellmann 
  * @version 1
@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 
 public class MinesweeperGUI extends Application {
 
+    /**
+     * Lädt die Datei minesweeper.fxml und erzeugt das zugehörige Fenster.
+     * @param primaryStage 
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -20,14 +24,13 @@ public class MinesweeperGUI extends Application {
             VBox root = (VBox) loader.load();
             Scene scene = new Scene(root);
 
-            // Fenster festlegen
             primaryStage.setScene(scene);
             primaryStage.setTitle("Minesweeper");
             primaryStage.centerOnScreen();
             primaryStage.setOnCloseRequest(event ->
                 {
-                    System.out.print('\u000C'); // Loescht die Konsolenausgabe
-                    System.exit(0);             // Beendet
+                    System.out.print('\u000C'); 
+                    System.exit(0);             
                 });
             primaryStage.show();
         } 

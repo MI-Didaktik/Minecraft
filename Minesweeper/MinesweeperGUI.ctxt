@@ -1,6 +1,7 @@
 #BlueJ class context
 comment0.target=MinesweeperGUI
-comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ MinesweeperGUI.\r\n\ \r\n\ @author\ Tim\ Busch,\ Beatrice\ Wellmann\ \r\n\ @version\ 1\r\n
+comment0.text=\r\n\ Dies\ ist\ die\ Klasse\ MinesweeperGUI,\ welche\ zum\ Start\ des\ Spiels\ und\ das\ Laden\ der\ fxml-Datei\ ben\u00F6tigt\ wird.\r\n\ \r\n\ @author\ Tim\ Busch,\ Beatrice\ Wellmann\ \r\n\ @version\ 1\r\n
 comment1.params=primaryStage
 comment1.target=void\ start(javafx.stage.Stage)
+comment1.text=\r\n\ L\u00E4dt\ die\ Datei\ minesweeper.fxml\ und\ erzeugt\ das\ zugeh\u00F6rige\ Fenster.\r\n\ @param\ primaryStage\ \r\n
 numComments=2
