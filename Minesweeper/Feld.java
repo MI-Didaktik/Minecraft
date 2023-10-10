@@ -28,6 +28,18 @@ public class Feld
         feldstatus = Feldstatus.VERDECKT; 
         istBombe = false; 
     }
+    
+    /**
+     * Konstruktor zu Testzwecken
+     * NICHT ANPASSEN
+     */
+    protected Feld(boolean istBombe, int nachbarBombenAnzahl, Feldstatus feldstatus, int reihe, int spalte){
+        this.istBombe = istBombe;
+        this.nachbarBombenAnzahl = nachbarBombenAnzahl;
+        this.feldstatus = feldstatus;
+        this.reihe = reihe;
+        this.spalte = spalte;
+    }
 
     /**
      * Liefert das Bild des Feldes.
@@ -109,9 +121,9 @@ public class Feld
      * @param spielstatus
      * @return bildname
      */
-    private String getBildName(Spielstatus spielstatus){
+    protected String getBildName(Spielstatus spielstatus){
         switch(feldstatus){
-            case VERDECKT: return "Frei";  
+            case VERDECKT: return "Verdeckt";  
             case MARKIERT: return "Markiert";  
             default: 
                 if(istBombe && spielstatus == Spielstatus.GEWONNEN) {

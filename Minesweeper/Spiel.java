@@ -25,6 +25,14 @@ public class Spiel {
         spielstatus = Spielstatus.NICHTGESTARTET;
         markierteFelder = 0;
     }
+    
+    /**
+     * Konstruktor zu Testzwecken
+     * NICHT ANPASSEN
+     */
+    public Spiel(Spielfeld spielfeld){
+        this.spielfeld = spielfeld;
+    }
 
     /**
      * Deckt alle verdeckten Nachbarn eines bestimmten Feldes auf.

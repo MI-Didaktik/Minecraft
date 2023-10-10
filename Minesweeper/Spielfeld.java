@@ -31,6 +31,16 @@ public class Spielfeld {
         anzahlVerdeckt = reihen * spalten;
         erzeugeSpielFeld();
     }
+    
+    /**
+     * Konstruktor zu Testzwecken
+     * NICHT ANPASSEN
+     */
+    public Spielfeld(Feld[][]felder){
+        this.felder = felder;
+        this.reihen =felder.length;
+        this.spalten = felder[0].length;
+    }
 
     /**
      * Deckt alle benachbarten Felder eines Feldes auf, bei welchen nachbarBombenAnzahl den Wert 0 hat. 

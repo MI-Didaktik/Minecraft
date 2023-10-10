@@ -44,11 +44,15 @@ public class Controller {
         spielfeldGrid.getChildren().clear();
         spielfeldGrid.getRowConstraints().clear();
         spielfeldGrid.getColumnConstraints().clear();
+        
 
-        //erzeugt einen neuen button und ruft die Methode mausListenerHinzufuegen auf
+        //erzeugt einen neuen button und ein Feld ruft die Methode mausListenerHinzufuegen auf
         Button button = new Button();
+        Feld feld = new Feld();
+        
+        //ruft die Methode mausListenerHinzufuegen auf
         mausListenerHinzufuegen(button, 0, 0);
-        aktualisiereBild(button);
+        aktualisiereBild(button, feld);
         
         //Fuegt den button zu reihe 0 und spalte 0 des spielfeldGrid hinzu 
         //(Die Groesse des spielfeldGrid muss nicht vorher festgelegt werden)
@@ -74,8 +78,8 @@ public class Controller {
             });
     }
 
-    private void aktualisiereBild(Button button) {
-        Image bild = new Image("bilder/" + "Bombe" + ".png", bildHoehe, bildBreite, true, false);
+    private void aktualisiereBild(Button button, Feld feld) {
+        Image bild = feld.getBild(bildBreite, bildHoehe);
         ImageView view = new ImageView();
         view.setImage(bild);
         button.setGraphic(view);

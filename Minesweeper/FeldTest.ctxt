@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=FeldTest
+comment0.text=\r\n\ Die\ Test-Klasse\ FeldTest.\r\n\r\n\ @author\ \ Tim\ Busch,\ Beatrice\ Wellmann\r\n\ @version\ 1\r\n
+comment1.params=
+comment1.target=void\ testGetBildNameForMarkiert()
+comment2.params=
+comment2.target=void\ testGetBildNameForVerdeckt()
+comment3.params=
+comment3.target=void\ testGetBildNameForNachbarn()
+comment4.params=
+comment4.target=void\ testGetBildNameForKeineNachbarn()
+numComments=5

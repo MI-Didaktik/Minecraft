@@ -1,8 +1,15 @@
 #BlueJ class context
 comment0.target=Feld
 comment0.text=\r\n\ @author\ \r\n\ @version\ \r\n
-comment1.params=breite\ hoehe
-comment1.target=javafx.scene.image.Image\ getBild(int,\ int)
-comment2.params=
-comment2.target=java.lang.String\ getBildName()
-numComments=3
+comment1.params=
+comment1.target=Feld()
+comment2.params=istBombe\ nachbarBombenAnzahl\ feldstatus\ reihe\ spalte
+comment2.target=Feld(boolean,\ int,\ Feldstatus,\ int,\ int)
+comment2.text=\r\n\ Konstruktor\ zu\ Testzwecken\r\n\ NICHT\ ANPASSEN\r\n
+comment3.params=breite\ hoehe
+comment3.target=javafx.scene.image.Image\ getBild(int,\ int)
+comment4.params=
+comment4.target=Feldstatus\ getFeldstatus()
+comment5.params=
+comment5.target=java.lang.String\ getBildName()
+numComments=6
