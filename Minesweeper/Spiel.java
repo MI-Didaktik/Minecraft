@@ -12,6 +12,7 @@ public class Spiel {
     private Spielstatus spielstatus;
     private Schwierigkeitsstufe schwierigkeitsstufe;
     private int markierteFelder;
+    private long highscore;
 
     /**
      * Konstruktor für Objekte der Klasse Spiel
@@ -24,11 +25,13 @@ public class Spiel {
             schwierigkeitsstufe.getSpalten());
         spielstatus = Spielstatus.NICHTGESTARTET;
         markierteFelder = 0;
+        highscore = 0;
     }
-    
+
     /**
      * Konstruktor zu Testzwecken
      * NICHT ANPASSEN
+     * @param spielfeld das Spielfeld
      */
     public Spiel(Spielfeld spielfeld){
         this.spielfeld = spielfeld;
@@ -139,5 +142,23 @@ public class Spiel {
      */
     public int getMarkierteFelder() {
         return markierteFelder;
+    }
+
+    /**
+     * Liefert den aktuellen Highscore.
+     * 
+     * @return highscore
+     */
+    public long getHighscore(){
+        return highscore;
+    }
+
+    /**
+     * Setzt den Highscore auf einen neuen Wert.
+     * 
+     * @param highscore der neue Highscore
+     */
+    public void setHighscore(long highscore){
+        this.highscore = highscore;
     }
 }

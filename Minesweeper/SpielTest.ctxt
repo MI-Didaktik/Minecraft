@@ -2,12 +2,9 @@
 comment0.target=SpielTest
 comment0.text=\r\n\ Die\ Test-Klasse\ SpielTest.\r\n\r\n\ @author\ \ Tim\ Busch,\ Beatrice\ Wellmann\r\n\ @version\ 1\r\n
 comment1.params=
-comment1.target=void\ setUp()
-comment1.text=\r\n\ \ Setzt\ das\ Testger\u00FCst\ fuer\ den\ Test.\r\n\r\n\ Wird\ vor\ jeder\ Testfall-Methode\ aufgerufen.\r\n
+comment1.target=void\ testDeckeVerdeckteNachbarnAuf()
 comment2.params=
-comment2.target=void\ testDeckeVerdeckteNachbarnAuf()
+comment2.target=void\ testMarkiereMarkiertesFeld()
 comment3.params=
-comment3.target=void\ testMarkiereMarkiertesFeld()
-comment4.params=
-comment4.target=void\ testMarkiereVerdecktesFeld()
-numComments=5
+comment3.target=void\ testMarkiereVerdecktesFeld()
+numComments=4

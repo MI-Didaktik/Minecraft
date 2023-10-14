@@ -48,7 +48,6 @@ public class Controller {
     private int bildBreite = 20;
     private int bildHoehe = 20;
 
-    private long highscore = 0;
     private long startZeit;
 
     /**
@@ -227,8 +226,9 @@ public class Controller {
      */
     private void aktualisiereHighscore() {
         long punkte = berechnePunkte();
-        highscore = Math.max(highscore, punkte);
+        long highscore = Math.max(spiel.getHighscore(), punkte);
         highscoreTextfeld.setText("" + highscore);
+        spiel.setHighscore(highscore);
     }
 
     /**

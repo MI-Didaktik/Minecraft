@@ -1,4 +1,3 @@
-
 /**
  * Die Aufzählungsklasse Feldstatus beeinhaltet die möglichen Status eines Feldes.
  * 

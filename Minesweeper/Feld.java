@@ -9,9 +9,9 @@ import javafx.scene.image.Image;
  */
 public class Feld
 {
+    private Feldstatus feldstatus; 
     private boolean istBombe;
     private int nachbarBombenAnzahl; 
-    private Feldstatus feldstatus; 
     private int reihe;
     private int spalte;
 
@@ -28,10 +28,15 @@ public class Feld
         feldstatus = Feldstatus.VERDECKT; 
         istBombe = false; 
     }
-    
+
     /**
      * Konstruktor zu Testzwecken
      * NICHT ANPASSEN
+     * @param istBombe enthält das Feld eine Bombe
+     * @param nachbarBombenAnzahl die Anzahl Nachbarbomben
+     * @param feldstatus der Feldstatus
+     * @param reihe die Reihe in der das Feld im Spielfeld liegt
+     * @param spalte die Spalte in der das Feld im Spielfeld liegt 
      */
     protected Feld(boolean istBombe, int nachbarBombenAnzahl, Feldstatus feldstatus, int reihe, int spalte){
         this.istBombe = istBombe;
@@ -61,10 +66,11 @@ public class Feld
     }
 
     /**
-     * Belegt das Feld mit einer Bombe. 
+     * Setzt die Variable istBombe auf den gewünschten boolean. 
+     * @param b boolean, der angibt, ob das Feld eine Bombe enthält
      */
-    public void setBombe(){
-        this.istBombe = true; 
+    public void setBombe(boolean b){
+        this.istBombe = b; 
     }
 
     /**

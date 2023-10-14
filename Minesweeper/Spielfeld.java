@@ -35,6 +35,7 @@ public class Spielfeld {
     /**
      * Konstruktor zu Testzwecken
      * NICHT ANPASSEN
+     * @param felder Array mit Feld-Objekten
      */
     public Spielfeld(Feld[][]felder){
         this.felder = felder;
@@ -238,7 +239,7 @@ public class Spielfeld {
             if (f.istBombe()) {
                 i--;
             } else {
-                f.setBombe();
+                f.setBombe(true);
             }
         }
     }

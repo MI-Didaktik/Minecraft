@@ -24,12 +24,6 @@ public class SpielfeldTest
     private Feld f42;
     private Feld f43;
     private List<Feld> felderListe;
-    /**
-     * Konstruktor fuer die Test-Klasse SpielfeldTest
-     */
-    public SpielfeldTest()
-    {
-    }
 
     /**
      *  Setzt das Testgerüst fuer den Test.
@@ -103,12 +97,12 @@ public class SpielfeldTest
     }
     
     @Test
-    public void testgetNachbarFelder(){
+    public void testGetNachbarFelder(){
         int nachbarFelderAnzahl = spielfeld.getNachbarFelder(f11).size();
         assertEquals(3,nachbarFelderAnzahl);
     }
     @Test
-    public void testgetNachbarFelder8Nachbarn(){
+    public void testGetNachbarFelder8Nachbarn(){
         int nachbarFelderAnzahl = spielfeld.getNachbarFelder(f22).size();
         assertEquals(8,nachbarFelderAnzahl);
     }
