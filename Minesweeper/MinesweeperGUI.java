@@ -38,5 +38,13 @@ public class MinesweeperGUI extends Application {
             e.printStackTrace();
         }
     }
+    
+    public static void main(String[] args)
+    {
+        launch(args);
+        int a=0;
+        int b=0;
+        a=a++;
+    }
 
 }

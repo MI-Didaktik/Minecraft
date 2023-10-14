@@ -8,8 +8,6 @@ public class Feld
     private boolean istBombe;
     private int nachbarBombenAnzahl; 
     private Feldstatus feldstatus; 
-    private int reihe;
-    private int spalte;
 
     public Feld(){
         //Konstruktor
@@ -19,12 +17,10 @@ public class Feld
      * Konstruktor zu Testzwecken
      * NICHT ANPASSEN
      */
-    public Feld(boolean istBombe, int nachbarBombenAnzahl, Feldstatus feldstatus, int reihe, int spalte){
+    public Feld(boolean istBombe, int nachbarBombenAnzahl, Feldstatus feldstatus){
         this.istBombe = istBombe;
         this.nachbarBombenAnzahl = nachbarBombenAnzahl;
         this.feldstatus = feldstatus;
-        this.reihe = reihe;
-        this.spalte = spalte;
     }
 
     public Image getBild(int breite, int hoehe){
@@ -34,8 +30,9 @@ public class Feld
     public Feldstatus getFeldstatus(){
         return feldstatus;
     }
-
+    
     protected String getBildName(){
+        //passe diese Methode an
         return "Bombe";
     }
 

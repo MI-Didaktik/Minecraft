@@ -102,7 +102,7 @@ public class SpielfeldTest
         assertEquals(Feldstatus.VERDECKT, f43.getFeldstatus());
     }
     
-        @Test
+    @Test
     public void testgetNachbarFelder(){
         int nachbarFelderAnzahl = spielfeld.getNachbarFelder(f11).size();
         assertEquals(3,nachbarFelderAnzahl);
